@@ -105,6 +105,7 @@ namespace StarterAssets
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
+        private Attack _attack;
 
         private const float _threshold = 0.01f;
 
@@ -138,6 +139,7 @@ namespace StarterAssets
             
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
+            _attack = GetComponent<Attack>();
             _input = GetComponent<StarterAssetsInputs>();
             #if ENABLE_INPUT_SYSTEM 
             _playerInput = GetComponent<PlayerInput>();
@@ -156,9 +158,19 @@ namespace StarterAssets
         {
             _hasAnimator = TryGetComponent(out _animator);
 
+            AttackCheck();
             JumpAndGravity();
             GroundedCheck();
             Move();
+        }
+
+        private void AttackCheck()
+        {
+            if (_input.atkclick) //&& _animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.7f)
+            {
+                _attack.LaunchAttack();
+                _input.atkclick = false;
+            }
         }
 
         private void LateUpdate()
