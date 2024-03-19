@@ -105,7 +105,7 @@ namespace StarterAssets
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
-        private Attack _attack;
+        private Fighter _attack;
 
         private const float _threshold = 0.01f;
 
@@ -139,7 +139,7 @@ namespace StarterAssets
             
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
-            _attack = GetComponent<Attack>();
+            _attack = GetComponent<Fighter>();
             _input = GetComponent<StarterAssetsInputs>();
             #if ENABLE_INPUT_SYSTEM 
             _playerInput = GetComponent<PlayerInput>();
@@ -168,11 +168,15 @@ namespace StarterAssets
         {
             if (_input.atkclick) //&& _animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.7f)
             {
-                _attack.LaunchAttack();
+                _attack.DoAttack();
                 _input.atkclick = false;
             }
+            if (_input.roll)
+            {
+                _attack.DoRoll();
+                _input.roll = false;
+            }
         }
-
         private void LateUpdate()
         {
             CameraRotation();
