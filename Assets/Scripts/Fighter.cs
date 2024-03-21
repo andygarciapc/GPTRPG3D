@@ -3,10 +3,12 @@ using UnityEngine;
 public class Fighter : MonoBehaviour
 {
     private Animator animator;
-    private bool hasAnimator, hasCollider;
+    private bool hasAnimator;
+    private bool hasCollider;
     private int animIDatk, animIDroll;
-    private Collider collider;
-    private Rigidbody rb;
+    //private Collider collider;
+    private CharacterController controller;
+    //private Rigidbody rb;
 
     public float cooldownTime = 1.5f;
     private float nextFireTime = 0f;
@@ -16,8 +18,10 @@ public class Fighter : MonoBehaviour
 
     private void Start()
     {
+        hasCollider = true;
         hasAnimator = TryGetComponent(out animator);
-        hasCollider = TryGetComponent(out collider);
+        //hasCollider = TryGetComponent(out collider);
+        controller = (tag == "Player") ? GetComponent<CharacterController>() : null;
         AssignAnimationIDs();
     }
 
@@ -85,24 +89,32 @@ public class Fighter : MonoBehaviour
 
     public void DoRoll()
     {
-        if (hasAnimator)
+        if (!hasAnimator) return;
+        animator.SetTrigger(animIDroll);
+        if (!hasCollider) return;
+        if (controller != null)
         {
-            animator.SetTrigger(animIDroll);
-            if (hasCollider)
-            {
-                collider.enabled = false;
-                rb.AddForce(transform.forward * 5, ForceMode.Impulse);
-            }
-            //this.transform.Translate(transform.forward * 1f);
+            controller.center = new Vector3(0f, 0.4f, 0f);
+            controller.height = 0.01f;
         }
+
+
+            //collider.enabled = false;
+            //rb = gameObject.AddComponent(typeof(Rigidbody)) as Rigidbody;
+            //rb.AddForce(new Vector3(transform.forward.x, 1.2f, transform.forward.z) * 2, ForceMode.Impulse);
+            //this.transform.Translate(transform.forward * 1f);
     }
 
     public void ToggleCollider() 
     {
-        if (hasCollider)
+        if (!hasCollider) return;
+        if(controller != null)
         {
-            collider.enabled = true;
-            Destroy(rb);
+            controller.center = new Vector3(0f, 0.93f, 0f);
+            controller.height = 1.8f;
         }
+
+
+        //collider.enabled = true;
     }
 }
