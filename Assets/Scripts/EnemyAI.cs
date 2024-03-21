@@ -8,6 +8,9 @@ public class EnemyAI : MonoBehaviour
     public Transform headTransform;
     public LayerMask whatIsGround, whatIsPlayer;
 
+    //
+    private int health;
+
     //Patrolling
     public Vector3 walkPoint;
     bool walkPointSet;

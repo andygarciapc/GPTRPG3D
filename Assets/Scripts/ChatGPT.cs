@@ -54,8 +54,10 @@ namespace OpenAI
             button.enabled = false;
             inputField.text = "";
             inputField.enabled = false;
-            
+
             // Complete the instruction
+
+            Debug.Log(newMessage.Content[newMessage.Content.Length - 1]);
             var completionResponse = await openai.CreateChatCompletion(new CreateChatCompletionRequest()
             {
                 Model = "gpt-3.5-turbo-0613",
