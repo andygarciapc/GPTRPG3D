@@ -1,36 +1,26 @@
 using UnityEngine;
-using System.Collections;
 
 
 namespace Basic
 {
-    public class Fighter : MonoBehaviour
+    public class BasicFighter : FighterAttributes
     {
+        //private
         private Animator animator;
-        private bool hasAnimator;
-        private bool hasCollider;
         private int animIDroll, animIDsheathe, animIDattackstance;
-        //private Collider collider;
-        private CharacterController controller;
-        //private Rigidbody rb;
+        protected bool attackStance;
+        private float attackStartTime = 0f;
+        private float inputWindowStart = 0.5f;
+        private float inputWindowEnd = 1.0f;
 
-        public Transform characterHand;
-        public Transform characterBack;
-        public Transform sword;
-        public SwordCollisionHandler swordCollisionHandler;
-        private bool attackStance;
-
+        //public
+        public WeaponCollisionController weaponCollisionHandler;
         public float cooldownTime = 1.5f;
         public static int noOfClicks = 0;
-        public FighterAttributes fighterAttributes;
-        //private float nextFireTime = 0f;
-        //float lastClickedTime = 0;
-        // maxComboDelay = 1;
-        //float lastAttackTime;
-
-        public GameObject ragdollPrefab;
-
         public float rollSpeed = 10f;
+        public Transform characterHand;
+        public Transform weaponHolster;
+        public Transform weapon;
 
         enum ComboState
         {
@@ -44,17 +34,15 @@ namespace Basic
         public bool AttackStance
         {
             get { return attackStance; }
+            set { attackStance = value; }
         }
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             attackStance = false;
-            hasCollider = true;
-            hasAnimator = TryGetComponent(out animator);
-            //hasCollider = TryGetComponent(out collider);
-            controller = (tag == "Player") ? GetComponent<CharacterController>() : null;
+            animator = GetComponent<Animator>();
             AssignAnimationIDs();
-            fighterAttributes = GetComponent<FighterAttributes>();
         }
 
         private void AssignAnimationIDs()
@@ -64,41 +52,32 @@ namespace Basic
             animIDattackstance = Animator.StringToHash("AttackStance");
         }
 
-        private void Update()
+        protected virtual void Update()
         {
-            if (!hasAnimator) return;
-
-
-            if (!(tag == "Player")) return;
-            UpdateSwordPosition();
-            if (IsPlayingAttackAnimation()) swordCollisionHandler.EnableCollider();
-            else swordCollisionHandler.DisableCollider();
+            UpdateWeaponPosition();
+            if (IsPlayingAttackAnimation()) weaponCollisionHandler.EnableCollider();
+            else weaponCollisionHandler.DisableCollider();
 
         }
-
-        private void UpdateSwordPosition()
+        private void UpdateWeaponPosition()
         {
-            if (!attackStance)
+            if (attackStance)
             {
-                sword.position = characterBack.position;
-                sword.rotation = characterBack.rotation;
+                weapon.position = characterHand.position;
+                weapon.rotation = characterHand.rotation;
             }
             else
             {
-                sword.position = characterHand.position;
-                sword.rotation = characterHand.rotation;
+                weapon.position = weaponHolster.position;
+                weapon.rotation = weaponHolster.rotation;
             }
         }
-
-        float attackStartTime = 0f;
-        float inputWindowStart = 0.5f;
-        float inputWindowEnd = 1.0f;
         public void DoAttack()
         {
             // Check if an attack animation is already playing
             if (IsPlayingAttackAnimation())
             {
-                swordCollisionHandler.EnableCollider();
+                weaponCollisionHandler.EnableCollider();
                 // If an attack animation is playing, check if it's within the input window for triggering the next attack
                 if (Time.time - attackStartTime > inputWindowStart && Time.time - attackStartTime < inputWindowEnd)
                 {
@@ -150,34 +129,16 @@ namespace Basic
             attackStartTime = 0f;
         }
 
-        private bool IsPlayingAttackAnimation()
+        protected bool IsPlayingAttackAnimation()
         {
             // Check if any of the attack animation states are currently playing
             return animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack");
         }
 
 
-        public void DoRoll(Vector3 rollDirection)
+        virtual public void DoRoll(Vector3 rollDirection)
         {
-            if (!hasAnimator) return;
             animator.SetTrigger(animIDroll);
-
-            if (!hasCollider) return;
-            if (controller == null) return;
-            controller.center = new Vector3(0f, 0.4f, 0f);
-            controller.height = 0.01f;
-            Debug.Log(rollDirection);
-            controller.Move(rollDirection * rollSpeed * Time.deltaTime);
-        }
-
-        public void ToggleCollider()
-        {
-            if (!hasCollider) return;
-            if (controller != null)
-            {
-                controller.center = new Vector3(0f, 0.93f, 0f);
-                controller.height = 1.8f;
-            }
         }
         public void ToggleAttackStance()
         {

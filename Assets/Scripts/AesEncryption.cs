@@ -2,61 +2,64 @@ using System;
 using System.IO;
 using System.Security.Cryptography;
 
-public class AesEncryption
+namespace BasicSecurity
 {
-    private readonly byte[] key;
-    private readonly byte[] iv;
-
-    public AesEncryption(byte[] key, byte[] iv)
+    public class AesEncryption
     {
-        this.key = key ?? throw new ArgumentNullException(nameof(key));
-        this.iv = iv ?? throw new ArgumentNullException(nameof(iv));
+        private readonly byte[] key;
+        private readonly byte[] iv;
 
-        if (key.Length != 16 && key.Length != 24 && key.Length != 32)
-            throw new ArgumentException("Key length must be 16, 24, or 32 bytes.");
-    }
-
-    public byte[] Encrypt(string plainText)
-    {
-        using (Aes aesAlg = Aes.Create())
+        public AesEncryption(byte[] key, byte[] iv)
         {
-            aesAlg.Key = key;
-            aesAlg.IV = iv;
+            this.key = key ?? throw new ArgumentNullException(nameof(key));
+            this.iv = iv ?? throw new ArgumentNullException(nameof(iv));
 
-            ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+            if (key.Length != 16 && key.Length != 24 && key.Length != 32)
+                throw new ArgumentException("Key length must be 16, 24, or 32 bytes.");
+        }
 
-            using (MemoryStream msEncrypt = new MemoryStream())
+        public byte[] Encrypt(string plainText)
+        {
+            using (Aes aesAlg = Aes.Create())
             {
-                using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                aesAlg.Key = key;
+                aesAlg.IV = iv;
+
+                ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+
+                using (MemoryStream msEncrypt = new MemoryStream())
                 {
-                    using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
+                    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                     {
-                        swEncrypt.Write(plainText);
+                        using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
+                        {
+                            swEncrypt.Write(plainText);
+                        }
+                        return msEncrypt.ToArray();
                     }
-                    return msEncrypt.ToArray();
                 }
             }
         }
-    }
 
-    public string Decrypt(string cipherText)
-    {
-        byte[] cipherBytes = Convert.FromBase64String(cipherText);
-
-        using (Aes aesAlg = Aes.Create())
+        public string Decrypt(string cipherText)
         {
-            aesAlg.Key = key;
-            aesAlg.IV = iv;
+            byte[] cipherBytes = Convert.FromBase64String(cipherText);
 
-            ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
-
-            using (MemoryStream msDecrypt = new MemoryStream(cipherBytes))
+            using (Aes aesAlg = Aes.Create())
             {
-                using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                aesAlg.Key = key;
+                aesAlg.IV = iv;
+
+                ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+
+                using (MemoryStream msDecrypt = new MemoryStream(cipherBytes))
                 {
-                    using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+                    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
                     {
-                        return srDecrypt.ReadToEnd();
+                        using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+                        {
+                            return srDecrypt.ReadToEnd();
+                        }
                     }
                 }
             }

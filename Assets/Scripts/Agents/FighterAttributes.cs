@@ -13,9 +13,19 @@ namespace Basic
         private float currStamina;
         public GameObject ragdollPrefab;
 
-        private void Start()
+        public float CurrentHealth
+        {
+            get { return currHealth; }
+        }
+        public float CurrentStamina
+        {
+            get { return currStamina; }
+        }
+
+        protected virtual void Start()
         {
             currHealth = maxHealth;
+            currStamina = maxStamina;
         }
 
         public void TakeDamage(float damageAmount)

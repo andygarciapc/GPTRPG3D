@@ -105,7 +105,7 @@ namespace Basic
         private CharacterController _controller;
         private BasicInputs _input;
         private GameObject _mainCamera;
-        private Fighter _attack;
+        private BasicPlayerFighter _attack;
 
         private const float _threshold = 0.01f;
 
@@ -139,7 +139,7 @@ namespace Basic
             
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
-            _attack = GetComponent<Fighter>();
+            _attack = GetComponent<BasicPlayerFighter>();
             _input = GetComponent<BasicInputs>();
             #if ENABLE_INPUT_SYSTEM 
             _playerInput = GetComponent<PlayerInput>();
@@ -173,7 +173,6 @@ namespace Basic
             }
             if (_input.roll)
             {
-                
                 _attack.DoRoll(new Vector3(_input.move.x, 0.0f, _input.move.y).normalized);
                 _input.roll = false;
             }
