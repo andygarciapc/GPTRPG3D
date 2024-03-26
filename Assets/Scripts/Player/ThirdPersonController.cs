@@ -166,15 +166,22 @@ namespace Basic
 
         private void AttackCheck()
         {
-            /*if (_input.atkclick) //&& _animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.7f)
+            if (_input.atkclick && _attack.AttackStance) //&& _animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.7f)
             {
                 _attack.DoAttack();
                 _input.atkclick = false;
-            }*/
+            }
             if (_input.roll)
             {
+                
                 _attack.DoRoll(new Vector3(_input.move.x, 0.0f, _input.move.y).normalized);
                 _input.roll = false;
+            }
+
+            if (_input.sheathe)
+            {
+                _attack.Sheathe();
+                _input.sheathe = false;
             }
         }
         private void LateUpdate()

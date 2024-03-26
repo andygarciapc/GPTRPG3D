@@ -14,7 +14,7 @@ namespace Basic
 		public bool sprint;
 		public bool atkclick;
 		public bool roll;
-		public bool holdweapon;
+		public bool sheathe;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -55,9 +55,9 @@ namespace Basic
         {
 			RollInput(value.isPressed);
         }
-		public void OnHoldweapon(InputValue value)
+		public void OnSheathe(InputValue value)
         {
-			HoldweaponInput(value.isPressed);
+			SheatheInput(value.isPressed);
         }
 #endif
 
@@ -91,9 +91,9 @@ namespace Basic
         {
 			roll = newRollState;
         }
-		public void HoldweaponInput(bool newHoldweaponState)
+		public void SheatheInput(bool newHoldweaponState)
         {
-			holdweapon = newHoldweaponState;
+			sheathe = newHoldweaponState;
         }
 
 

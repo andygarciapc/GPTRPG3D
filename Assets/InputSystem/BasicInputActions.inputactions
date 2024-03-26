@@ -60,9 +60,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "HoldWeapon",
+                    "name": "Sheathe",
                     "type": "Button",
-                    "id": "0242b96d-c2f5-4947-a16d-8f6351d2d655",
+                    "id": "e0e0a8c1-cc72-46cb-9952-2ca3517944d1",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -301,23 +301,23 @@
                 },
                 {
                     "name": "",
-                    "id": "1722122d-948d-41d3-b79a-04abe8a0f48f",
-                    "path": "<Keyboard>/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardMouse",
-                    "action": "HoldWeapon",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "e82be672-90fa-49fd-99b1-33505cc79b6a",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "Pause/Menu/Escape",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "788fae30-cc42-41a7-b18e-953f4f5b2e2d",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Sheathe",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

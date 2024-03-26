@@ -9,130 +9,165 @@ namespace Basic
         private Animator animator;
         private bool hasAnimator;
         private bool hasCollider;
-        private int animIDatk, animIDroll;
+        private int animIDroll, animIDsheathe, animIDattackstance;
         //private Collider collider;
         private CharacterController controller;
         //private Rigidbody rb;
 
-        public Transform characterChest;
         public Transform characterHand;
+        public Transform characterBack;
         public Transform sword;
+        public SwordCollisionHandler swordCollisionHandler;
+        private bool attackStance;
 
         public float cooldownTime = 1.5f;
-        private float nextFireTime = 0f;
         public static int noOfClicks = 0;
-        float lastClickedTime = 0;
-        float maxComboDelay = 1;
+        public FighterAttributes fighterAttributes;
+        //private float nextFireTime = 0f;
+        //float lastClickedTime = 0;
+        // maxComboDelay = 1;
+        //float lastAttackTime;
 
-        private Coroutine rollCoroutine;
+        public GameObject ragdollPrefab;
 
         public float rollSpeed = 10f;
 
+        enum ComboState
+        {
+            None,
+            Attack1,
+            Attack2,
+            Attack3
+        }
+        private ComboState currentComboState = ComboState.None;
+
+        public bool AttackStance
+        {
+            get { return attackStance; }
+        }
+
         private void Start()
         {
+            attackStance = false;
             hasCollider = true;
             hasAnimator = TryGetComponent(out animator);
             //hasCollider = TryGetComponent(out collider);
             controller = (tag == "Player") ? GetComponent<CharacterController>() : null;
             AssignAnimationIDs();
+            fighterAttributes = GetComponent<FighterAttributes>();
         }
 
         private void AssignAnimationIDs()
         {
-            //animIDatk = Animator.StringToHash("Attack1");
             animIDroll = Animator.StringToHash("Roll");
+            animIDsheathe = Animator.StringToHash("Sheathe");
+            animIDattackstance = Animator.StringToHash("AttackStance");
         }
 
         private void Update()
         {
             if (!hasAnimator) return;
-            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1")) { animator.SetBool("Attack1", false); }
-            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack2")) { animator.SetBool("Attack1", false); }
-            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack3"))
-            {
-                animator.SetBool("Attack3", false);
-                noOfClicks = 0;
-            }
 
-            if (Time.time - lastClickedTime > maxComboDelay)
-            {
-                noOfClicks = 0;
-            }
 
-            if (Time.time > nextFireTime)
-            {
-                if (Input.GetMouseButton(0))
-                {
-                    OnClick();
-                }
-            }
+            if (!(tag == "Player")) return;
+            UpdateSwordPosition();
+            if (IsPlayingAttackAnimation()) swordCollisionHandler.EnableCollider();
+            else swordCollisionHandler.DisableCollider();
+
         }
 
-        public void OnClick()
+        private void UpdateSwordPosition()
         {
-            lastClickedTime = Time.time;
-            noOfClicks++;
-            if (noOfClicks == 1)
+            if (!attackStance)
             {
-                animator.SetBool("Attack1", true);
+                sword.position = characterBack.position;
+                sword.rotation = characterBack.rotation;
             }
-            noOfClicks = Mathf.Clamp(noOfClicks, 0, 3);
-
-            if (noOfClicks >= 2 && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
+            else
             {
-                animator.SetBool("Attack1", false);
-                animator.SetBool("Attack2", true);
-            }
-            if (noOfClicks >= 3 && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack2"))
-            {
-                animator.SetBool("Attack2", false);
-                animator.SetBool("Attack3", true);
+                sword.position = characterHand.position;
+                sword.rotation = characterHand.rotation;
             }
         }
 
+        float attackStartTime = 0f;
+        float inputWindowStart = 0.5f;
+        float inputWindowEnd = 1.0f;
         public void DoAttack()
         {
-            /*
-            if(hasAnimator){
-                animator.SetTrigger(animIDatk);
+            // Check if an attack animation is already playing
+            if (IsPlayingAttackAnimation())
+            {
+                swordCollisionHandler.EnableCollider();
+                // If an attack animation is playing, check if it's within the input window for triggering the next attack
+                if (Time.time - attackStartTime > inputWindowStart && Time.time - attackStartTime < inputWindowEnd)
+                {
+                    // Trigger the next attack if player inputs within the window
+                    TriggerNextAttack();
+                }
+                else
+                {
+                    // Reset combo state if player misses the input window
+                    ResetCombo();
+                }
             }
-             */
+            else
+            {
+                // Start the first attack animation and record its start time
+                StartAttackAnimation(ComboState.Attack1);
+            }
         }
+
+        private void TriggerNextAttack()
+        {
+            switch (currentComboState)
+            {
+                case ComboState.Attack1:
+                    StartAttackAnimation(ComboState.Attack2);
+                    break;
+                case ComboState.Attack2:
+                    StartAttackAnimation(ComboState.Attack3);
+                    break;
+                case ComboState.Attack3:
+                    // Reset back to the first attack for looping combos
+                    ResetCombo();
+                    break;
+            }
+        }
+
+        private void StartAttackAnimation(ComboState nextState)
+        {
+            // Trigger the appropriate attack animation and record its start time
+            animator.SetTrigger("Attack" + (int)nextState);
+            currentComboState = nextState;
+            attackStartTime = Time.time;
+        }
+
+        private void ResetCombo()
+        {
+            // Reset the combo state and clear attack start time
+            currentComboState = ComboState.None;
+            attackStartTime = 0f;
+        }
+
+        private bool IsPlayingAttackAnimation()
+        {
+            // Check if any of the attack animation states are currently playing
+            return animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack");
+        }
+
 
         public void DoRoll(Vector3 rollDirection)
         {
             if (!hasAnimator) return;
-            animator.SetTrigger("Roll");
+            animator.SetTrigger(animIDroll);
 
             if (!hasCollider) return;
             if (controller == null) return;
             controller.center = new Vector3(0f, 0.4f, 0f);
             controller.height = 0.01f;
-            if (rollCoroutine != null)
-                StopCoroutine(rollCoroutine);
-            rollCoroutine = StartCoroutine(RollCoroutine(rollDirection));
-            
-            
-            //controller.Move(rollDirection * rollSpeed * Time.deltaTime);
-
-            //collider.enabled = false;
-            //rb = gameObject.AddComponent(typeof(Rigidbody)) as Rigidbody;
-            //rb.AddForce(new Vector3(transform.forward.x, 1.2f, transform.forward.z) * 2, ForceMode.Impulse);
-            //this.transform.Translate(transform.forward * 1f);
-        }
-
-        IEnumerator RollCoroutine(Vector3 rollDirection)
-        {
-            float rollDuration = 0.5f;
-            float elapsedTime = 0f;
-            
-            while(elapsedTime < rollDuration)
-            {
-                float t = elapsedTime / rollDuration;
-                controller.Move(rollDirection * rollSpeed * Time.deltaTime);
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
+            Debug.Log(rollDirection);
+            controller.Move(rollDirection * rollSpeed * Time.deltaTime);
         }
 
         public void ToggleCollider()
@@ -143,21 +178,15 @@ namespace Basic
                 controller.center = new Vector3(0f, 0.93f, 0f);
                 controller.height = 1.8f;
             }
-
-
-            //collider.enabled = true;
+        }
+        public void ToggleAttackStance()
+        {
+            attackStance = !attackStance;
+            animator.SetBool(animIDattackstance, attackStance);
         }
         public void Sheathe()
         {
-            sword.SetParent(characterChest);
-            //sword.localPosition = Vector3.zero;
-            //sword.localRotation = Quaternion.identity;
-        }
-        public void Unsheathe()
-        {
-            sword.SetParent(characterHand);
-            //sword.localPosition = Vector3.zero;
-            //sword.localRotation = Quaternion.identity;
+            animator.SetTrigger(animIDsheathe);
         }
     }
 }
