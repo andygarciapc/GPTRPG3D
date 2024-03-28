@@ -69,6 +69,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "34b55eff-702d-41b0-8153-b5f56a658054",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Pause/Menu/Escape",
                     "type": "Button",
                     "id": "16ac431a-75c7-4e18-833b-1f39d891af79",
@@ -318,6 +327,17 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "Sheathe",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7e66a4b5-8964-4cb0-80f5-575204dd979c",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

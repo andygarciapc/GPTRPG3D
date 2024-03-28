@@ -11,7 +11,7 @@ namespace Basic
         protected bool attackStance;
         private float attackStartTime = 0f;
         private float inputWindowStart = 0.5f;
-        private float inputWindowEnd = 1.0f;
+        private float inputWindowEnd = 2.0f;
 
         //public
         public WeaponCollisionController weaponCollisionHandler;
@@ -52,8 +52,9 @@ namespace Basic
             animIDattackstance = Animator.StringToHash("AttackStance");
         }
 
-        protected virtual void Update()
+        protected override void Update()
         {
+            base.Update();
             UpdateWeaponPosition();
             if (IsPlayingAttackAnimation()) weaponCollisionHandler.EnableCollider();
             else weaponCollisionHandler.DisableCollider();

@@ -105,7 +105,7 @@ namespace Basic
         private CharacterController _controller;
         private BasicInputs _input;
         private GameObject _mainCamera;
-        private BasicPlayerFighter _attack;
+        private BasicPlayerFighter fighter;
 
         private const float _threshold = 0.01f;
 
@@ -139,7 +139,7 @@ namespace Basic
             
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
-            _attack = GetComponent<BasicPlayerFighter>();
+            fighter = GetComponent<BasicPlayerFighter>();
             _input = GetComponent<BasicInputs>();
             #if ENABLE_INPUT_SYSTEM 
             _playerInput = GetComponent<PlayerInput>();
@@ -166,20 +166,20 @@ namespace Basic
 
         private void AttackCheck()
         {
-            if (_input.atkclick && _attack.AttackStance) //&& _animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.7f)
+            if (_input.atkclick && fighter.AttackStance) //&& _animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.7f)
             {
-                _attack.DoAttack();
+                fighter.DoAttack();
                 _input.atkclick = false;
             }
-            if (_input.roll)
+            if (_input.roll && fighter.canSprint)
             {
-                _attack.DoRoll(new Vector3(_input.move.x, 0.0f, _input.move.y).normalized);
+                fighter.DoRoll(new Vector3(_input.move.x, 0.0f, _input.move.y).normalized);
                 _input.roll = false;
             }
 
             if (_input.sheathe)
             {
-                _attack.Sheathe();
+                fighter.Sheathe();
                 _input.sheathe = false;
             }
         }
@@ -236,7 +236,18 @@ namespace Basic
         private void Move()
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+            bool sprintInput = _input.sprint;
+            float targetSpeed;
+            if (sprintInput && fighter.canSprint)
+            {
+                targetSpeed = SprintSpeed;
+                fighter.isSprinting = true;
+            }
+            else
+            {
+                targetSpeed = MoveSpeed;
+                fighter.isSprinting = false;
+            }
 
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 

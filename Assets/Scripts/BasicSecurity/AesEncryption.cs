@@ -18,7 +18,7 @@ namespace BasicSecurity
                 throw new ArgumentException("Key length must be 16, 24, or 32 bytes.");
         }
 
-        public byte[] Encrypt(string plainText)
+        public string Encrypt(string plainText)
         {
             using (Aes aesAlg = Aes.Create())
             {
@@ -35,7 +35,8 @@ namespace BasicSecurity
                         {
                             swEncrypt.Write(plainText);
                         }
-                        return msEncrypt.ToArray();
+                        byte[] encryptedBytes = msEncrypt.ToArray();
+                        return Convert.ToBase64String(encryptedBytes);
                     }
                 }
             }

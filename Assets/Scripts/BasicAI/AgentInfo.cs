@@ -29,10 +29,10 @@ namespace BasicAI
 
     public class AgentInfo : MonoBehaviour
     {
-        [SerializeField] protected string name = "";
-        [SerializeField] protected Occupation occupation;
-        [SerializeField] protected Talent talents;
-        [SerializeField] protected Personality npcPersonality;
+        public string name = "";
+        public Occupation occupation;
+        public Talent talents;
+        public Personality npcPersonality;
     }
 
 }

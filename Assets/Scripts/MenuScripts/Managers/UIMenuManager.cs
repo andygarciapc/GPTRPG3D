@@ -277,7 +277,10 @@ namespace SlimUI.ModernMenu{
 					loadingBar.value = 1;
 
 					if (Input.GetKeyDown(userPromptKey)){
+						Cursor.visible = false;
+						Cursor.lockState = CursorLockMode.Locked;
 						operation.allowSceneActivation = true;
+
 					}
                 }else if(operation.progress >= 0.9f && !waitForInput){
 					operation.allowSceneActivation = true;

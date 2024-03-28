@@ -7,6 +7,7 @@ namespace Basic
 
         //public
         public Transform characterBack;
+        public float rollCost = 20f;
 
         //private
         private CharacterController controller;
@@ -29,6 +30,7 @@ namespace Basic
             controller.height = 0.01f;
             Debug.Log(rollDirection);
             controller.Move(rollDirection * rollSpeed * Time.deltaTime);
+            AddStamina(-rollCost);
         }
 
         public void ToggleCollider()

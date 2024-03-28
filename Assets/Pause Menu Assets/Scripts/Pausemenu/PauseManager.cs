@@ -422,6 +422,7 @@ namespace GreatArcStudios
         /// </summary>
         public void returnToMenu()
         {
+            Time.timeScale = timeScale;
             Application.LoadLevel(mainMenu);
             uiEventSystem.SetSelectedGameObject(defualtSelectedMain);
         }
@@ -457,6 +458,8 @@ namespace GreatArcStudios
                 audioPanel.SetActive(false);
                 TitleTexts.SetActive(true);
                 mask.SetActive(true);
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
                 Time.timeScale = 0;
                 for (int i = 0; i < otherUIElements.Length; i++)
                 {
@@ -468,6 +471,8 @@ namespace GreatArcStudios
                  }  */
             }
             else if(Input.GetKeyDown(KeyCode.Escape) && mainPanel.active == true) {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
                 Time.timeScale = timeScale;
                 mainPanel.SetActive(false);
                 vidPanel.SetActive(false);

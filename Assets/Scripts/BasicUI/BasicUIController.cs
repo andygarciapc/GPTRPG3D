@@ -10,12 +10,12 @@ namespace BasicUI
         [SerializeField] protected Slider healthSlider;
         [SerializeField] protected Slider easeHealthSlider;
         [SerializeField] protected BasicFighter fighter;
-        private float lerpspeed = 0.05f;
+        protected float lerpspeed = 0.005f; // original : 0.05f
         // Start is called before the first frame update
         protected virtual void Start()
         {
-            healthSlider.maxValue = fighter.maxHealth;
-            easeHealthSlider.maxValue = fighter.maxHealth;
+            healthSlider.maxValue = fighter.MaxHealth;
+            easeHealthSlider.maxValue = fighter.MaxHealth;
         }
 
         // Update is called once per frame

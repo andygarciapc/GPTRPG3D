@@ -27,7 +27,7 @@ namespace Basic
             BasicFighter enemyFighter = other.GetComponent<BasicFighter>();
             if (enemyFighter != null)
             {
-                enemyFighter.TakeDamage(damageAmount);
+                enemyFighter.AddHealth(-damageAmount);
                 Debug.Log(other.name + " has been hit for " + damageAmount);
             }
         }
