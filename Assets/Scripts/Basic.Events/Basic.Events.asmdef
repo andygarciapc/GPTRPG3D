@@ -1,0 +1,16 @@
+{
+    "name": "BasicEvents",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6cb1981f3356bbf4094ec96fac9a2c42"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
