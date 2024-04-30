@@ -1,9 +1,10 @@
 {
-    "name": "BasicEvents",
+    "name": "Basic.AI",
     "rootNamespace": "",
     "references": [
-        "GUID:6cb1981f3356bbf4094ec96fac9a2c42",
-        "GUID:7ab19621df222e6459866e834bc8d25a"
+        "GUID:640ea5081a1d0f6468d38f2d52808a5a",
+        "GUID:0437d04145d432340be34960e6f19b74",
+        "GUID:9f190e8721594c24c8003768323b5a74"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

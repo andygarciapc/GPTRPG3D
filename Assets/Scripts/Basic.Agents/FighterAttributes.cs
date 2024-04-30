@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-
-namespace Basic
+using Basic.Events;
+namespace Basic.Agents
 {
     public class FighterAttributes : MonoBehaviour
     {
@@ -120,7 +119,11 @@ namespace Basic
             if (isEnemy)
             {
                 FighterAttributes playerFighter = GameObject.Find("BasicPlayer").GetComponent<FighterAttributes>();
-                if (playerFighter != null) playerFighter.AddExperience(expValue);
+                if (playerFighter != null)
+                {
+                    GameEventsManager.instance.combatEvents.EnemyKilled();
+                    playerFighter.AddExperience(expValue);
+                }
                 else Debug.Log("NULL PLAYERFIGHTER");
             }
             Destroy(gameObject);

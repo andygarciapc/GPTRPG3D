@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-namespace Basic
+namespace Basic.Agents
 {
     public class BasicPlayerFighter : BasicFighter
     {

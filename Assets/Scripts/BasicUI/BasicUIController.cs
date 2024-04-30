@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using Basic;
+using Basic.Agents;
 
 namespace BasicUI
 {

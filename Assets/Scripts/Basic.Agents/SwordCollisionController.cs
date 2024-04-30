@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Basic
+namespace Basic.Agents
 {
     public class SwordCollisionController : WeaponCollisionController
     {

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-namespace Basic
+namespace Basic.Agents
 {
     public class BasicFighter : FighterAttributes
     {

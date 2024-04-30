@@ -1,9 +1,8 @@
 {
-    "name": "BasicEvents",
+    "name": "Basic.Agents",
     "rootNamespace": "",
     "references": [
-        "GUID:6cb1981f3356bbf4094ec96fac9a2c42",
-        "GUID:7ab19621df222e6459866e834bc8d25a"
+        "GUID:77913766f703c4d4da6438ccb5ad71ec"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

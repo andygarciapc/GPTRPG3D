@@ -2,6 +2,8 @@
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
+using Basic.Events;
+using Basic.Agents;
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
@@ -103,7 +105,7 @@ namespace Basic
 #endif
         private Animator _animator;
         private CharacterController _controller;
-        private BasicInputs _input;
+        private InputManager _input;
         private GameObject _mainCamera;
         private BasicPlayerFighter fighter;
 
@@ -140,7 +142,7 @@ namespace Basic
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             fighter = GetComponent<BasicPlayerFighter>();
-            _input = GetComponent<BasicInputs>();
+            _input = GetComponent<InputManager>();
             #if ENABLE_INPUT_SYSTEM 
             _playerInput = GetComponent<PlayerInput>();
             #else
@@ -162,6 +164,11 @@ namespace Basic
             JumpAndGravity();
             GroundedCheck();
             Move();
+        }
+
+        private void Attack()
+        {
+
         }
 
         private void AttackCheck()
