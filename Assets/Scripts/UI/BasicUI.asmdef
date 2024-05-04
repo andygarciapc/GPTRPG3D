@@ -1,0 +1,19 @@
+{
+    "name": "BasicUI",
+    "rootNamespace": "",
+    "references": [
+        "GUID:cf1013e828a2ebe41ac9e918244dc022",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:4446f24bda7ed7e43ba570af666bca90",
+        "GUID:77913766f703c4d4da6438ccb5ad71ec"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

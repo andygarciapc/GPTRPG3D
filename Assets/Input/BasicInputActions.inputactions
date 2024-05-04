@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Roll",
+                    "name": "Evade",
                     "type": "Button",
                     "id": "f7361163-dd69-44a0-8aee-965d8bf1ad92",
                     "expectedControlType": "Button",
@@ -302,7 +302,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "Roll",
+                    "action": "Evade",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -313,7 +313,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Roll",
+                    "action": "Evade",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

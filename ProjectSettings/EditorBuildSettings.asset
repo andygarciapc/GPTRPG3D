@@ -9,7 +9,13 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu/MainMenu.unity
     guid: 5de842f9a4f7b9b44a747b62a5bc8a57
   - enabled: 1
-    path: Assets/Scenes/DebugScene.unity
-    guid: 4a5c9454f354a9b468937a9587cfd167
+    path: Assets/Scenes/CharacterCreation.unity
+    guid: 96d2c2ae43467f6479c4407dc2db604e
+  - enabled: 1
+    path: Assets/Scenes/Dialogue.unity
+    guid: 523e2a98b1c50374b9e2093bdc0ce4ee
+  - enabled: 1
+    path: Assets/Scenes/Debug.unity
+    guid: 68dac4e134844f945881416f3034de48
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}

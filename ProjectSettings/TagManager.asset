@@ -6,6 +6,10 @@ TagManager:
   tags:
   - CinemachineTarget
   - Enemy
+  - EventSystem
+  - TextInput
+  - ConstantsManager
+  - AreaInfo
   layers:
   - Default
   - TransparentFX

@@ -53,7 +53,7 @@ namespace GreatArcStudios
         public Text pauseMenu;
 
         /// <summary>
-        /// Main menu level string used for loading the main menu. This means you'll need to type in the editor text box, the name of the main menu level, ie: "mainmenu";
+        /// Main menu currentLevel string used for loading the main menu. This means you'll need to type in the editor text box, the name of the main menu currentLevel, ie: "mainmenu";
         /// </summary>
         public String mainMenu;
         //DOF script name
@@ -167,11 +167,11 @@ namespace GreatArcStudios
         /// </summary>
         public Text resolutionLabel;
         /// <summary>
-        /// Lod bias float array. You should manually assign these based on the quality level.
+        /// Lod bias float array. You should manually assign these based on the quality currentLevel.
         /// </summary>
         public  float[] LODBias;
         /// <summary>
-        /// Shadow distance array. You should manually assign these based on the quality level.
+        /// Shadow distance array. You should manually assign these based on the quality currentLevel.
         /// </summary>
         public  float[] shadowDist;
         /// <summary>
@@ -226,7 +226,7 @@ namespace GreatArcStudios
 
         //Initial music volume
         private float _beforeMusic;
-        //Preset level
+        //Preset currentLevel
         private int _currentLevel;
         //Resoutions
         private Resolution[] allRes;
@@ -279,7 +279,7 @@ namespace GreatArcStudios
         /// </summary>
         public void Start()
         {
-           
+            uiEventSystem = GameObject.FindGameObjectWithTag("EventSystem").GetComponent<EventSystem>();
             readUseSimpleTerrain = useSimpleTerrain;
             if (useSimpleTerrain)
             {
@@ -356,7 +356,7 @@ namespace GreatArcStudios
 
         }
         /// <summary>
-        /// Restart the level by loading the loaded level.
+        /// Restart the currentLevel by loading the loaded currentLevel.
         /// </summary>
         public void Restart()
         {
@@ -1271,11 +1271,11 @@ namespace GreatArcStudios
             // aaOption.text = "MSAA: " + QualitySettings.antiAliasing.ToString();
         }
         /// <summary>
-        /// Set the quality level one level higher. This is done by getting the current quality level, then using 
+        /// Set the quality currentLevel one currentLevel higher. This is done by getting the current quality currentLevel, then using 
         /// <c> 
         /// QualitySettings.IncreaseLevel();
         /// </c>
-        /// to increase the level. The current level variable is set to the new quality setting, and the label is updated.
+        /// to increase the currentLevel. The current currentLevel variable is set to the new quality setting, and the label is updated.
         /// </summary>
         public void nextPreset()
         {
@@ -1290,11 +1290,11 @@ namespace GreatArcStudios
             }
         }
         /// <summary>
-        /// Set the quality level one level lower. This is done by getting the current quality level, then using 
+        /// Set the quality currentLevel one currentLevel lower. This is done by getting the current quality currentLevel, then using 
         /// <c> 
         /// QualitySettings.DecreaseLevel();
         /// </c>
-        /// to decrease the level. The current level variable is set to the new quality setting, and the label is updated.
+        /// to decrease the currentLevel. The current currentLevel variable is set to the new quality setting, and the label is updated.
         /// </summary>
         public void lastPreset()
         {

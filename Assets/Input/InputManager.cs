@@ -2,22 +2,18 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Basic.Events;
 
-namespace Basic
+namespace Basic.Input
 {
 	[RequireComponent(typeof(PlayerInput))]
 	public class InputManager : MonoBehaviour
 	{
+		public static InputManager instance;
+
 		[Header("Character Input Values")]
 		public Vector2 move;
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
-		public bool atkclick;
-		public bool roll;
-		public bool sheathe;
-		public bool submit;
-		public bool escape;
-		public bool interact;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -41,37 +37,34 @@ namespace Basic
 		public void OnJump(InputValue value)
 		{
 			jump = value.isPressed;
+			GameEventsManager.instance.inputEvents.JumpPressed();
 		}
 		public void OnSprint(InputValue value)
 		{
 			sprint = value.isPressed;
 		}
-
 		public void OnAttack(InputValue value)
         {
-			atkclick = value.isPressed;
+			GameEventsManager.instance.inputEvents.AttackPressed();
         }
-		public void OnRoll(InputValue value)
+		public void OnEvade(InputValue value)
         {
-			roll = value.isPressed;
+			GameEventsManager.instance.inputEvents.EvadePressed();
         }
 		public void OnSheathe(InputValue value)
         {
-			sheathe = value.isPressed;
+			GameEventsManager.instance.inputEvents.SheathePressed();
 		}
 		public void OnInteract(InputValue value)
         {
-			interact = value.isPressed;
 			GameEventsManager.instance.inputEvents.InteractPressed();
         }
 		public void OnEscape(InputValue value)
 		{
-			escape = value.isPressed;
 			GameEventsManager.instance.inputEvents.EscapePressed();
 		}
 		public void OnSubmit(InputValue value)
         {
-			submit = value.isPressed;
 			GameEventsManager.instance.inputEvents.SubmitPressed();
         }
 		private void OnApplicationFocus(bool hasFocus)
@@ -83,6 +76,10 @@ namespace Basic
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 		}
-	}
+        private void Awake()
+        {
+			instance = this;
+        }
+    }
 	
 }

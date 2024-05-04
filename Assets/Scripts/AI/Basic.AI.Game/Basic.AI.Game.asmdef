@@ -1,0 +1,24 @@
+{
+    "name": "Basic.AI.Game",
+    "rootNamespace": "",
+    "references": [
+        "GUID:cee8b2d8a00649e40b1194f47f38b89f",
+        "GUID:9f190e8721594c24c8003768323b5a74",
+        "GUID:640ea5081a1d0f6468d38f2d52808a5a",
+        "GUID:0437d04145d432340be34960e6f19b74",
+        "GUID:4b8e52894a61e994bb2292285ab6e41c",
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:cf1013e828a2ebe41ac9e918244dc022",
+        "GUID:4446f24bda7ed7e43ba570af666bca90",
+        "GUID:ff6d6d9134289af4e82a5ca2b0e29428"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,20 @@
+{
+    "name": "Basic.Player",
+    "rootNamespace": "",
+    "references": [
+        "GUID:77913766f703c4d4da6438ccb5ad71ec",
+        "GUID:cf1013e828a2ebe41ac9e918244dc022",
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:40a9bd7aacf903040aad1fc1a094db48",
+        "GUID:cee8b2d8a00649e40b1194f47f38b89f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

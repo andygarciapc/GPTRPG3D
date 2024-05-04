@@ -71,7 +71,7 @@ namespace GreatArcStudios
         /// </summary>
         public int lastShadowCascade;
         /// <summary>
-        /// Aniso texture level
+        /// Aniso texture currentLevel
         /// </summary>
         public int anisoLevel;
         /// <summary>
