@@ -11,6 +11,12 @@ using UnityEngine.SceneManagement;
 
 public class AITools
 {
+    public async static Task<string> GenerateQuest()
+    {
+        //TODO: Implement method
+        return "KillXQuest";
+
+    }
     public async static Task<ChatMessage> GenerateStarterMessage(BasicAgentInfo agentInfo, BasicAreaInfo areaInfo, string questInfo)
     {
         OpenAIService openAIService = new OpenAIService();
@@ -36,6 +42,32 @@ public class AITools
         ChatMessage response = await openAIService.SendChatMessage(prompt);
         Debug.Log(response.Content);
         return response;
+    }
+    public async static Task<string> ChooseNextScene(BasicAreaInfo areaInfo, BasicAgentInfo agentInfo, string questInfo)
+    {
+        OpenAIService openAIService = new OpenAIService();
+        string prompt = "Choose which scene to load from the list of scenes given. Keep in mind all the information given to you.\n" +
+            "Choose the name using this example format:\n" +
+            "SCENE_NAME\n" +
+            "Here are the scenes to choose from:\n" +
+            "GENERIC, GENERICn\n" +
+            "The following info is the info about the game area the player was just in:\n" +
+            areaInfo.GetPrompt() +
+            "The following info is the info about the quest the player will be going on.\n" +
+            "Quest Info: " + questInfo + "\n" +
+            "The following info is the info about the agent you are:\n" +
+            agentInfo.GetPrompt() +
+            "Once again, please reply with only the scene name you are choosing";
+        ChatMessage chatMessage = await openAIService.SendChatMessage(prompt);
+        string response = chatMessage.Content;
+        Debug.Log(response);
+        return response;
+    }
+    public async static Task<GameObject> ChooseNPC()
+    {
+        //TODO IMPLEMENT FUNCTION
+        GameObject toReturn = null;
+        return toReturn;
     }
     public async static Task<AgentInfo> GenerateAgentInfo()
     {

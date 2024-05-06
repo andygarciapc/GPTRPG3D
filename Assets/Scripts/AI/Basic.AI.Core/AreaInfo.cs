@@ -30,15 +30,7 @@ namespace Basic.AI.Core
         public BasicAreaInfo info;
         private void Awake()
         {
-            info = new BasicAreaInfo();
-            info.gameArea = gameArea;
-            info.gameStory = gameStory;
-        }
-        public void SetAreaInfo(BasicAreaInfo _info)
-        {
-            gameStory = _info.gameStory;
-            gameArea = _info.gameArea;
-            info = _info;
+            info = new BasicAreaInfo(this);
         }
     }
 }

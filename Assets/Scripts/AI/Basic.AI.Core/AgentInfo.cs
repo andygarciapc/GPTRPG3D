@@ -67,6 +67,15 @@ namespace Basic.AI.Core
             agentName = "";
             about = "";
         }
+        public BasicAgentInfo(AgentInfo agentInfo)
+        {
+            agentName = agentInfo.agentName;
+            occupation = agentInfo.occupation;
+            alignment = agentInfo.alignment;
+            talents = agentInfo.talents;
+            quirks = agentInfo.quirks;
+            about = agentInfo.about;
+        }
         private string EnumListToString<T>(List<T> enumList) where T : Enum
         {
             string toReturn = "";
@@ -101,13 +110,7 @@ namespace Basic.AI.Core
         public BasicAgentInfo info;
         public void Start()
         {
-            info = new BasicAgentInfo();
-            info.agentName = agentName;
-            info.occupation = occupation;
-            info.alignment = alignment;
-            info.talents = talents;
-            info.quirks = quirks;
-            info.about = about;
+            info = new BasicAgentInfo(this);
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Basic.Quests.Variable
 
         // state info
         public QuestState state;
+        public bool isMainQuest = true;
         private int currentQuestStepIndex;
         private QuestStepState[] questStepStates;
 

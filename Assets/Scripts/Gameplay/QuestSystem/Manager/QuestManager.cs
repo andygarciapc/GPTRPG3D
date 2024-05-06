@@ -4,6 +4,7 @@ using UnityEngine;
 using Basic.Quests.Variable;
 using Basic.Quests.Core;
 using Basic.Events;
+using UnityEngine.SceneManagement;
 namespace Basic.Quests.Manager
 {
     public class QuestManager : MonoBehaviour
@@ -137,6 +138,12 @@ namespace Basic.Quests.Manager
             Quest quest = GetQuestById(id);
             ClaimRewards(quest);
             ChangeQuestState(quest.info.id, QuestState.FINISHED);
+            if (quest.isMainQuest)
+            {
+                Debug.Log("Main Quest Completed");
+                //TODO: IMPLEMENT DATA TRANSFER BETWEEN SCENES
+                SceneManager.LoadScene("Dialogue");
+            }
         }
 
         private void ClaimRewards(Quest quest)

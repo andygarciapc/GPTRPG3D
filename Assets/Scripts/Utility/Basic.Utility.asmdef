@@ -1,12 +1,13 @@
 {
-    "name": "Basic.AI.Tools",
+    "name": "Basic.Utility",
     "rootNamespace": "",
     "references": [
+        "GUID:4b8e52894a61e994bb2292285ab6e41c",
+        "GUID:640ea5081a1d0f6468d38f2d52808a5a",
         "GUID:cee8b2d8a00649e40b1194f47f38b89f",
         "GUID:7ab19621df222e6459866e834bc8d25a",
-        "GUID:640ea5081a1d0f6468d38f2d52808a5a",
         "GUID:0437d04145d432340be34960e6f19b74",
-        "GUID:4b8e52894a61e994bb2292285ab6e41c"
+        "GUID:a673d8291341e244ebca27f6694ed74a"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

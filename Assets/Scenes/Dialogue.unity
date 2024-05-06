@@ -217,6 +217,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &481134947
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6296317012529821525, guid: 7e7edc0626ae92142958ab0370a64ae7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.5716653
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296317012529821525, guid: 7e7edc0626ae92142958ab0370a64ae7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -13.3357315
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296317012529821525, guid: 7e7edc0626ae92142958ab0370a64ae7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 43.764072
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296317012529821525, guid: 7e7edc0626ae92142958ab0370a64ae7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296317012529821525, guid: 7e7edc0626ae92142958ab0370a64ae7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296317012529821525, guid: 7e7edc0626ae92142958ab0370a64ae7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296317012529821525, guid: 7e7edc0626ae92142958ab0370a64ae7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296317012529821525, guid: 7e7edc0626ae92142958ab0370a64ae7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296317012529821525, guid: 7e7edc0626ae92142958ab0370a64ae7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296317012529821525, guid: 7e7edc0626ae92142958ab0370a64ae7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7344054725021044202, guid: 7e7edc0626ae92142958ab0370a64ae7, type: 3}
+      propertyPath: m_Name
+      value: Managers
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7e7edc0626ae92142958ab0370a64ae7, type: 3}
 --- !u!1001 &843171053
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -321,6 +378,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2233822097626512582, guid: 8035399d9f825784a9183d2cd67b1518, type: 3}
   m_PrefabInstance: {fileID: 843171053}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1443963636 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4827243657151268205, guid: 8035399d9f825784a9183d2cd67b1518, type: 3}
+  m_PrefabInstance: {fileID: 843171053}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6571b22c7dcc084e9598e3e8b7c15d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1512654966
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,8 +433,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a412be76aff4fc40a05aae7537cb8e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameStory: null
-  gameArea: null
+  gameStory: 
+  gameArea: This is a dialogue only quest scene that is meant to transition between
+    areas/quests. In this scene the player can not move and can only send messages
+    with the agent. The agent they are talking too is meant to give them the quest
+    they will be going on in the next scene.
 --- !u!1 &1558717511
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,8 +839,8 @@ MonoBehaviour:
   scroll: {fileID: 7456858815285224754}
   sent: {fileID: 961534450149497043, guid: adc0146c2853ed1418133faaf4379eb1, type: 3}
   received: {fileID: 8660877164928630359, guid: 53cd26a6eefa5a74086203cd118a04d3, type: 3}
-  npcInfo: {fileID: 0}
-  areaInfo: {fileID: 0}
+  npcInfo: {fileID: 1443963636}
+  areaInfo: {fileID: 1512654969}
   npcDialogue: {fileID: 0}
   isDialogueScene: 0
   OnReplyReceived:
@@ -2118,3 +2189,4 @@ SceneRoots:
   - {fileID: 843171053}
   - {fileID: 1512654968}
   - {fileID: 1558717513}
+  - {fileID: 481134947}

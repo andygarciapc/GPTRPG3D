@@ -45,7 +45,7 @@ namespace Basic.AI.Game
 
         // Start is called before the first frame update
         async void Start() {  
-            /*if (isDialogueScene)
+            if (isDialogueScene)
             {
                 ChatMessage starterMessage = await AITools.GenerateStarterMessage(npcInfo.info, areaInfo.info, "A quest about killing stuff");
                 ChatMessage promptMessage = new ChatMessage()
@@ -56,7 +56,7 @@ namespace Basic.AI.Game
                 messages.Add(promptMessage);
                 AppendMessage(starterMessage);
                 messages.Add(starterMessage);
-            }*/
+            }
         }
         /// <summary>
         /// Used by SendReply()
@@ -78,8 +78,7 @@ namespace Basic.AI.Game
                 "Reply to the questions considering your quirks, occupation, and talents.\n" +
                 "Do not mention that you are an NPC. If the question is out of scope for your knowledge say so.\n" +
                 //"Reply to only NPC lines not to the Adventurer's lines.\n" +
-                "If I want to end the conversation, finish your sentence with the phrase END_CONVO\n" +
-                "If you want to end the conversation, finish your sentence with the phrase FORCE_END" +
+                "Once you want to end the conversation and send the player to the next scene, finish your sentence with the phrase END_CONVO\n" +
                 "The follwing info is the info about the game world: \n" +
                 areaInfo.info.GetPrompt() +
                 "The following info is about the NPC you are: \n" +
@@ -152,13 +151,19 @@ namespace Basic.AI.Game
         /// <summary>
         /// End the conversation with NPC
         /// </summary>
-        public void EndConvo()
+        public async void EndConvo()
         {
             //npcDialogue.QuitButton();
             if(npcDialogue != null) { npcDialogue.QuitButton(); }
             else
             {
-                
+                if (!isDialogueScene) return;
+                string scene = await AITools.ChooseNextScene(areaInfo.info, npcInfo.info, "A quest about killing some zombies.");
+                if (scene == "GENERIC") {
+                    Debug.Log("CHATGPT CHOOSES GENERIC SCENE");
+                    SceneManager.LoadScene("Debug");
+                }
+                return;
             }
         }
     }

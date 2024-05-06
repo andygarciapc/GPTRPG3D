@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using Basic.Events;
+using UnityEngine.SceneManagement;
 public class SpawnManager : MonoBehaviour
 {
     public List<GameObject> enemyPrefabs;
@@ -14,7 +15,32 @@ public class SpawnManager : MonoBehaviour
     private float timer;
     private void Awake()
     {
+        enableSpawning = false;
         SpawnPlayer();
+    }
+    private void OnEnable()
+    {
+        GameEventsManager.instance.questEvents.onStartQuest += StartQuest;
+        GameEventsManager.instance.questEvents.onFinishQuest += FinishQuest;
+    }
+    private void OnDisable()
+    {
+        GameEventsManager.instance.questEvents.onStartQuest -= StartQuest;
+        GameEventsManager.instance.questEvents.onFinishQuest -= FinishQuest;
+    }
+    public void FinishQuest(string questId)
+    {
+        if(questId == "KillXQuest")
+        {
+            enableSpawning = false;
+        }
+    }
+    public void StartQuest(string questId)
+    {
+        if(questId == "KillXQuest")
+        {
+            enableSpawning = true;
+        }
     }
     // Start is called before the first frame update
     void Start()

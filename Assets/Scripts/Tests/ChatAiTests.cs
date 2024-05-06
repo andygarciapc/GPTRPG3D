@@ -82,7 +82,7 @@ namespace Basic.Tests
             Assert.AreEqual("Hello, NPC!", chatAi.messages[0].Content);
         }
 
-        [UnityTest]
+        /*[UnityTest]
         public IEnumerator ChatAi_EndConvo_Test()
         {
             // Arrange
@@ -97,7 +97,7 @@ namespace Basic.Tests
             // Assert
             yield return null; // Wait for the end of frame
                                // TODO: Assert whatever state or behavior you expect after ending conversation
-        }
+        }*/
 
         [TearDown]
         public void TearDown()
