@@ -1,0 +1,16 @@
+{
+    "name": "Basic.Agents",
+    "rootNamespace": "",
+    "references": [
+        "GUID:77913766f703c4d4da6438ccb5ad71ec"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

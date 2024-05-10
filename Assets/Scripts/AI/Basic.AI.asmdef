@@ -1,0 +1,18 @@
+{
+    "name": "Basic.AI",
+    "rootNamespace": "",
+    "references": [
+        "GUID:640ea5081a1d0f6468d38f2d52808a5a",
+        "GUID:0437d04145d432340be34960e6f19b74",
+        "GUID:9f190e8721594c24c8003768323b5a74"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

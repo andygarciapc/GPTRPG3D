@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - CinemachineTarget
+  - Enemy
+  - EventSystem
+  - TextInput
+  - ConstantsManager
+  - AreaInfo
   layers:
   - Default
   - TransparentFX

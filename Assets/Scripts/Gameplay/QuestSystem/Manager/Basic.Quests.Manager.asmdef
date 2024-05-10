@@ -1,0 +1,18 @@
+{
+    "name": "Basic.Quests.Manager",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6cb1981f3356bbf4094ec96fac9a2c42",
+        "GUID:77913766f703c4d4da6438ccb5ad71ec",
+        "GUID:7ab19621df222e6459866e834bc8d25a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
