@@ -145,6 +145,15 @@ namespace SlimUI.ModernMenu{
 				StartCoroutine(LoadAsynchronously(scene));
 			}
 		}
+		public void LoadSaveGame(string scene)
+        {
+			if (PlayerPrefs.GetString("Username") == null) return;
+			if (PlayerPrefs.GetString("Username").Length <= 2) return;
+            if(scene != "")
+            {
+				StartCoroutine(LoadAsynchronously(scene));
+            }
+        }
 
 		public void  DisablePlayCampaign(){
 			playMenu.SetActive(false);

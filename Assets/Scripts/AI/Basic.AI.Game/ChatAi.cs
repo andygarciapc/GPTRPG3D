@@ -8,6 +8,7 @@ using Basic.Security;
 using Basic.AI.Core;
 using Basic.AI;
 using UnityEngine.SceneManagement;
+using Basic.Events;
 
 namespace Basic.AI.Game
 {
@@ -43,6 +44,15 @@ namespace Basic.AI.Game
             button.onClick.AddListener(SendReply);
         }
 
+        private void OnEnable()
+        {
+            GameEventsManager.instance.inputEvents.onEscapePressed += EndConvo;
+        }
+        private void OnDisable()
+        {
+            GameEventsManager.instance.inputEvents.onEscapePressed -= EndConvo;
+        }
+
         // Start is called before the first frame update
         async void Start() {  
             if (isDialogueScene)
@@ -57,6 +67,11 @@ namespace Basic.AI.Game
                 AppendMessage(starterMessage);
                 messages.Add(starterMessage);
             }
+        }
+        private void Update()
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
         /// <summary>
         /// Used by SendReply()
@@ -154,6 +169,7 @@ namespace Basic.AI.Game
         public async void EndConvo()
         {
             //npcDialogue.QuitButton();
+            Debug.Log("EndConvo()");
             if(npcDialogue != null) { npcDialogue.QuitButton(); }
             else
             {
