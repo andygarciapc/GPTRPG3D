@@ -7,7 +7,7 @@ using Basic.Quests.Manager;
 public class KillXQuestStep : QuestStep
 {
     private int enemiesKilled = 0;
-    private int enemiesToKill = 5;
+    private int enemiesToKill = 2;
     private void Start()
     {
         UpdateState();
