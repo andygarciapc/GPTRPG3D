@@ -45,7 +45,7 @@ Once the project is installed and built, you can launch the game and start playi
 
 ## Documentation
 
-For detailed documentation on GPT-RPG, refer to the [documentation folder](/Documentation) in this repository. It includes information on project objectives, architecture, design patterns, testing plans, and more.
+For detailed documentation on GPT-RPG, refer to the [official documentation](https://docs.google.com/document/d/e/2PACX-1vQE3xCCKQZSTqmIqhbQCxb6-oMXQro71rc8ALKBVTbJQEo5-UOBaj8yh4ayz-D0Zvx87JlJF19-V9Xs/pub) in this repository. It includes information on project objectives, architecture, design patterns, testing plans, and more.
 
 ## Contributing
 
